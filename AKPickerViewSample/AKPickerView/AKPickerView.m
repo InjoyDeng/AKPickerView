@@ -7,6 +7,7 @@
 //
 
 #import "AKPickerView.h"
+#import "AKPickerItemModel.h"
 
 #import <Availability.h>
 
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong) UIFont *highlightedFont;
+@property (nonatomic, strong) UIImageView *backgroundView;
 @end
 
 @interface AKCollectionViewLayout : UICollectionViewFlowLayout
@@ -197,7 +199,8 @@
 	for (NSInteger i = 0; i < item; i++) {
 		NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
 		CGSize cellSize = [self collectionView:self.collectionView layout:self.collectionView.collectionViewLayout sizeForItemAtIndexPath:indexPath];
-		offset += cellSize.width;
+        CGFloat spacing = [self collectionView:self.collectionView layout:self.collectionView.collectionViewLayout minimumLineSpacingForSectionAtIndex:indexPath.section];
+		offset += cellSize.width + spacing;
 	}
 
 	NSIndexPath *firstIndexPath = [NSIndexPath indexPathForItem:0 inSection:0];
@@ -288,8 +291,17 @@
 {
 	AKCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([AKCollectionViewCell class])
 																		   forIndexPath:indexPath];
-
-	if ([self.dataSource respondsToSelector:@selector(pickerView:titleForItem:)]) {
+    if ([self.dataSource respondsToSelector:@selector(pickerView:modelForItem:)]) {
+        AKPickerItemModel *model = [self.dataSource pickerView:self modelForItem:indexPath.item];
+        cell.label.text                  = model.title;
+        cell.label.textColor             = model.titleColor;
+        cell.label.highlightedTextColor  = model.highlightedColor;
+        cell.label.font                  = model.font;
+        cell.font                        = model.font;
+        cell.highlightedFont             = model.highlightedFont;
+        cell.backgroundView.backgroundColor = model.backgroundColor;
+        cell.backgroundView.layer.cornerRadius = model.radius;
+    } else if ([self.dataSource respondsToSelector:@selector(pickerView:titleForItem:)]) {
 		NSString *title = [self.dataSource pickerView:self titleForItem:indexPath.item];
 		cell.label.text = title;
 		cell.label.textColor = self.textColor;
@@ -316,7 +328,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	CGSize size = CGSizeMake(self.interitemSpacing, collectionView.bounds.size.height);
-	if ([self.dataSource respondsToSelector:@selector(pickerView:titleForItem:)]) {
+    if ([self.dataSource respondsToSelector:@selector(pickerView:modelForItem:)]) {
+        AKPickerItemModel *model = [self.dataSource pickerView:self modelForItem:indexPath.item];
+        size.width = [self sizeForString:model.title].width + 8;
+    } else if ([self.dataSource respondsToSelector:@selector(pickerView:titleForItem:)]) {
 		NSString *title = [self.dataSource pickerView:self titleForItem:indexPath.item];
 		size.width += [self sizeForString:title].width;
 		if ([self.delegate respondsToSelector:@selector(pickerView:marginForItem:)]) {
@@ -337,7 +352,7 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-	return 0.0;
+	return 5.0;
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -400,6 +415,9 @@
 - (void)initialize
 {
 	self.layer.doubleSided = NO;
+    self.backgroundView = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.backgroundView];
+    
 	self.label = [[UILabel alloc] initWithFrame:self.contentView.bounds];
 	self.label.backgroundColor = [UIColor clearColor];
 	self.label.textAlignment = NSTextAlignmentCenter;
@@ -437,6 +455,16 @@
 		[self initialize];
 	}
 	return self;
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat backgroundViewWidth = self.contentView.bounds.size.width;
+    self.backgroundView.frame = CGRectMake(0,
+                                           (self.contentView.bounds.size.height - backgroundViewWidth) / 2,
+                                           backgroundViewWidth,
+                                           backgroundViewWidth);
 }
 
 - (void)setSelected:(BOOL)selected

@@ -7,7 +7,7 @@
 //
 
 #import "AKViewController.h"
-
+#import "AKPickerItemModel.h"
 #import "AKPickerView.h"
 
 @interface AKViewController () <AKPickerViewDataSource, AKPickerViewDelegate>
@@ -63,9 +63,21 @@
  *
  */
 
-- (NSString *)pickerView:(AKPickerView *)pickerView titleForItem:(NSInteger)item
-{
-	return self.titles[item];
+//- (NSString *)pickerView:(AKPickerView *)pickerView titleForItem:(NSInteger)item
+//{
+//    return self.titles[item];
+//}
+
+- (AKPickerItemModel *)pickerView:(AKPickerView *)pickerView modelForItem:(NSInteger)item {
+    AKPickerItemModel *model = [AKPickerItemModel new];
+    model.title = @"11";
+    model.font = [UIFont systemFontOfSize:16];
+    model.highlightedFont = [UIFont boldSystemFontOfSize:19];
+    model.titleColor = [UIColor colorWithRed:166/255.0 green:166/255.0 blue:166/255.0 alpha:1];
+    model.highlightedColor = [UIColor colorWithRed:166/255.0 green:166/255.0 blue:166/255.0 alpha:1];
+    model.backgroundColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1];
+    model.radius = 1.5;
+    return model;
 }
 
 /*

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3DB9B920230D70007C180B /* AKPickerItemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3DB9B820230D70007C180B /* AKPickerItemModel.m */; };
 		660AFE291A604C550078B21C /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 660AFE281A604C550078B21C /* Launch Screen.xib */; };
 		660F9EA118E6E9AC00EE7347 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660F9EA018E6E9AC00EE7347 /* Foundation.framework */; };
 		660F9EA318E6E9AC00EE7347 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 660F9EA218E6E9AC00EE7347 /* CoreGraphics.framework */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B3DB9B720230D70007C180B /* AKPickerItemModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AKPickerItemModel.h; sourceTree = "<group>"; };
+		0B3DB9B820230D70007C180B /* AKPickerItemModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKPickerItemModel.m; sourceTree = "<group>"; };
 		660AFE281A604C550078B21C /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		660F9E9D18E6E9AC00EE7347 /* AKPickerViewSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AKPickerViewSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		660F9EA018E6E9AC00EE7347 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,6 +132,8 @@
 			children = (
 				660F9ED918E6EA4800EE7347 /* AKPickerView.h */,
 				660F9EDA18E6EA4800EE7347 /* AKPickerView.m */,
+				0B3DB9B720230D70007C180B /* AKPickerItemModel.h */,
+				0B3DB9B820230D70007C180B /* AKPickerItemModel.m */,
 			);
 			path = AKPickerView;
 			sourceTree = "<group>";
@@ -162,6 +167,12 @@
 				CLASSPREFIX = AK;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Akkyie Y";
+				TargetAttributes = {
+					660F9E9C18E6E9AC00EE7347 = {
+						DevelopmentTeam = 9UU3YN8573;
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 660F9E9818E6E9AC00EE7347 /* Build configuration list for PBXProject "AKPickerViewSample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -207,6 +218,7 @@
 				660F9EB118E6E9AC00EE7347 /* AKAppDelegate.m in Sources */,
 				660F9EB718E6E9AC00EE7347 /* AKViewController.m in Sources */,
 				660F9EDB18E6EA4800EE7347 /* AKPickerView.m in Sources */,
+				0B3DB9B920230D70007C180B /* AKPickerItemModel.m in Sources */,
 				660F9EAD18E6E9AC00EE7347 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,12 +320,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: KEIICHIRO YOSHIMURA (9959TSWU8T)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9UU3YN8573;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AKPickerViewSample/AKPickerViewSample-Prefix.pch";
 				INFOPLIST_FILE = "AKPickerViewSample/AKPickerViewSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -323,11 +338,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9UU3YN8573;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AKPickerViewSample/AKPickerViewSample-Prefix.pch";
 				INFOPLIST_FILE = "AKPickerViewSample/AKPickerViewSample-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
