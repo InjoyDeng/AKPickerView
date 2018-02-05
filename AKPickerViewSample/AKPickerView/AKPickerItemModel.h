@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIColor *titleColor;
 @property (nonatomic, strong) UIColor *highlightedColor;
 
+@property (nonatomic, assign) CGFloat backgroundWidth;
 @property (nonatomic, strong) UIColor *backgroundColor;
 @property (nonatomic, assign) CGFloat radius;
 
